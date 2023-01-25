@@ -72,8 +72,8 @@ app.post("/allIceCreams/add", (req, res) => {
     iceCream.allIceCreams.push({ID:"0",Name:IceName,Info:IceInfo,Type:IceType,Company:IceCompany,nutritionalContent: { Energy: { Calorie: IceCalories, Kilojoules: IceKilojoules },Fat:IceFat,Salt:IceSalt,Carbohydrates:IceCarbohydrates,Protein:IceProtein}})
     IdIncrement();
 
-    console.log(request.body);      // your JSON
-    response.send(request.body); 
+    console.log(req.body);      // your JSON
+    response.send(req.body); 
     res.send("Ice cream added.")
 })
 
