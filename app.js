@@ -56,7 +56,7 @@ app.get("/allIceCreams/add", (req, res) => {
     res.sendFile(__dirname + "/public/addData.html")
 })
 
-app.post("/allIceCreams/add", (req, res) => {  
+app.put("/allIceCreams/add", (req, res) => {  
     let IceName = req.body.Name
     let IceInfo = req.body.Info
     let IceType = req.body.Type
@@ -75,7 +75,7 @@ app.post("/allIceCreams/add", (req, res) => {
 })
 
 
-app.delete("/allIceCreams/delete/:id", (req, res) => {
+app.get("/allIceCreams/delete/:id", (req, res) => {
 
     if(iceCream.allIceCreams[(req.params.id)-1] != null)
     {
