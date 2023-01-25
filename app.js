@@ -88,7 +88,6 @@ app.get("/allIceCreams/delete/:id", (req, res) => {
         iceCream.allIceCreams.splice((req.params.id)-1,1);
         IdIncrement();
         res.send(deletedIceCream.Name +" was deleted.")
-        res.
     }
     else
     {
