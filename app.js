@@ -3,10 +3,6 @@ const app = express()
 const bodyParser = require("body-parser")
 app.use(bodyParser.urlencoded({ extended: true }))
 
-var fs = require('fs');
-
-// file is included here:
-eval(fs.readFileSync('add.js')+'');
 
 const PORT = process.env.PORT || 3000
 
