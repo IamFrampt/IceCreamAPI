@@ -1,0 +1,101 @@
+body {
+    text-align: center;
+    background-color: #08AEEA;
+    background-image: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
+    background-repeat: no-repeat;
+    margin: 0 15%;
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 5rem;
+    margin-bottom: 2%;
+}
+
+h3 {
+
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.7rem;
+}
+
+#endpoints {
+    text-align: left;
+}
+
+pre {
+    font-family: comfortaa;
+}
+
+
+
+input {
+    padding: 5px;
+    margin: 10px 0px;
+    border: 2px solid #eee;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+    border-radius: 10px;
+    width: 50%;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+form{
+   margin-top: 0;
+}
+.button-56 {
+  align-items: center;
+  background-color: #00eeff;
+  border: 2px solid #111;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #111;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  max-width: 100%;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-56:after {
+  background-color: #111;
+  border-radius: 8px;
+  content: "";
+  display: block;
+  height: 48px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform .2s ease-out;
+  z-index: -1;
+}
+
+.button-56:hover:after {
+  transform: translate(0, 0);
+}
+
+.button-56:active {
+  background-color: #ffdeda;
+  outline: 0;
+}
+
+.button-56:hover {
+  outline: 0;
+}
+
+@media (min-width: 768px) {
+  .button-56 {
+    padding: 0 40px;
+  }
+}
