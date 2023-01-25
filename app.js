@@ -47,7 +47,11 @@ app.get("/allIceCreams", (req, res) => {
 })
 
 app.get("/allIceCreams/icecream/:id", (req, res) => {
+    if(iceCream.allIceCreams[(req.params.id)-1] != null)
+    {
     res.send(iceCream.allIceCreams[(req.params.id) - 1])
+    }
+    res.send(400,"No ice cream with that id.")
 })
 
 
@@ -83,11 +87,12 @@ app.get("/allIceCreams/delete/:id", (req, res) => {
         console.log(deletedIceCream)
         iceCream.allIceCreams.splice((req.params.id)-1,1);
         IdIncrement();
-        res.send(deletedIceCream.Name +" was deleted.")
+        res.send(deletedIceCream.Name +" was deleted.")b
+        res.
     }
     else
     {
-        res.send("No ice cream at that id")
+        res.send(400,"No ice cream at that id")
     }
 })
 app.use(express.static(__dirname + '/public'));
