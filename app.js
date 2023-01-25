@@ -73,8 +73,8 @@ app.post("/allIceCreams/add", (req, res) => {
     IdIncrement();
 
     console.log(req.body);      // your JSON
-    response.send(req.body); 
-    res.send("Ice cream added.")
+    res.send(req.body); 
+    //res.send("Ice cream added.")
 })
 
 
