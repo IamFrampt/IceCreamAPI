@@ -71,6 +71,9 @@ app.post("/allIceCreams/add", (req, res) => {
 
     iceCream.allIceCreams.push({ID:"0",Name:IceName,Info:IceInfo,Type:IceType,Company:IceCompany,nutritionalContent: { Energy: { Calorie: IceCalories, Kilojoules: IceKilojoules },Fat:IceFat,Salt:IceSalt,Carbohydrates:IceCarbohydrates,Protein:IceProtein}})
     IdIncrement();
+
+    console.log(request.body);      // your JSON
+    response.send(request.body); 
     res.send("Ice cream added.")
 })
 
@@ -91,20 +94,6 @@ app.get("/allIceCreams/delete/:id", (req, res) => {
     }
 })
 app.use(express.static(__dirname + '/public'));
-
-const api_url = "http://localhost:3000/allicecreams/icecream/:id";
-  
-// Defining async function
-async function getapi(url) {
-    
-    // Storing response
-    const response = await fetch(url);
-    
-    // Storing data in form of JSON
-    var data = await response.json();
-    console.log(data);
-}
-// getapi(api_url);
 
 
 app.listen(PORT, () => {
