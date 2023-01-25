@@ -56,7 +56,7 @@ app.get("/allIceCreams/add", (req, res) => {
     res.sendFile(__dirname + "/public/addData.html")
 })
 
-app.put("/allIceCreams/add", (req, res) => {  
+app.post("/allIceCreams/add", (req, res) => {  
     let IceName = req.body.Name
     let IceInfo = req.body.Info
     let IceType = req.body.Type
