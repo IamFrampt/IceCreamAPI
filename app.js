@@ -39,25 +39,25 @@ app.get("/", (req, res) => {
 })
 
 app.get("/allIceCreams", (req, res) => {
-    //var hej = iceCream.allIceCreams.sort((p1, p2) => (p1.nutritionalContent.Energy.Calorie > p2.nutritionalContent.Energy.Calorie) ? 0 : -1);
     res.send(iceCream.allIceCreams)
 })
 
 app.get("/allIceCreams/icecream/:id", (req, res) => {
-    if(iceCream.allIceCreams[(req.params.id)-1] != null)
-    {
-    res.send(iceCream.allIceCreams[(req.params.id) - 1])
+    if (iceCream.allIceCreams[(req.params.id) - 1] != null) {
+        res.send(iceCream.allIceCreams[(req.params.id) - 1])
     }
-    res.send(400,"No ice cream with that id.")
+    
+    res.statusCode = 401;
+    res.send( "No ice cream with that id.")
 })
 
 
-app.get("/allIceCreams/add", (req, res) => {  
-    
+app.get("/allIceCreams/add", (req, res) => {
+
     res.sendFile(__dirname + "/public/addData.html")
 })
 
-app.post("/allIceCreams/add", (req, res) => {  
+app.post("/allIceCreams/add", (req, res) => {
     let IceName = req.body.Name
     let IceInfo = req.body.Info
     let IceType = req.body.Type
@@ -69,26 +69,30 @@ app.post("/allIceCreams/add", (req, res) => {
     let IceCarbohydrates = req.body.Carbohydrates
     let IceProtein = req.body.Protein
 
-    iceCream.allIceCreams.push({ID: iceCream.allIceCreams.length+1,Name:IceName,Info:IceInfo,Type:IceType,Company:IceCompany,nutritionalContent: { Energy: { Calorie: IceCalories, Kilojoules: IceKilojoules },Fat:IceFat,Salt:IceSalt,Carbohydrates:IceCarbohydrates,Protein:IceProtein}})
-        
+    for (let i = 0; i < iceCream.allIceCreams.length; i++) {
+        if (iceCream.allIceCreams[i].Name === req.body.Name) {
+            res.statusCode = 401;
+            res.send("Ice cream already exist in the api.")
+        }
+    }
+
+    iceCream.allIceCreams.push({ ID: iceCream.allIceCreams.length + 1, Name: IceName, Info: IceInfo, Type: IceType, Company: IceCompany, nutritionalContent: { Energy: { Calorie: IceCalories, Kilojoules: IceKilojoules }, Fat: IceFat, Salt: IceSalt, Carbohydrates: IceCarbohydrates, Protein: IceProtein } })
     res.send("Ice cream added.")
 })
 
 
 app.delete("/allIceCreams/delete/:id", (req, res) => {
 
-    if(iceCream.allIceCreams[(req.params.id)-1] != null)
-    {
-        var deletedIceCream = iceCream.allIceCreams[req.params.id-1];
+    if (iceCream.allIceCreams[(req.params.id) - 1] != null) {
+        var deletedIceCream = iceCream.allIceCreams[req.params.id - 1];
         //console.log(deletedIceCream)
-        iceCream.allIceCreams.splice((req.params.id)-1,1);
+        iceCream.allIceCreams.splice((req.params.id) - 1, 1);
         IdIncrement();
-        res.send(deletedIceCream.Name +" was deleted.")
+        res.send(deletedIceCream.Name + " was deleted.")
     }
-    else
-    {
-        res.send(400,"No ice cream at that id")
-    }
+        res.statusCode = 401;
+        res.send('No ice cream at that id.');
+    
 })
 app.use(express.static(__dirname + '/public'));
 
@@ -97,10 +101,8 @@ app.listen(PORT, () => {
     console.log(`Hey Listen!, You're on port: ${PORT}`)
 })
 
-function IdIncrement()
-{ 
-    for(let i =0;i<iceCream.allIceCreams.length;i++)
-    {
-        iceCream.allIceCreams[i].ID = i+1; 
+function IdIncrement() {
+    for (let i = 0; i < iceCream.allIceCreams.length; i++) {
+        iceCream.allIceCreams[i].ID = i + 1;
     }
 }
