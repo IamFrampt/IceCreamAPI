@@ -67,10 +67,14 @@ app.post("/allIceCreams/add", (req, res) => {
     let IceSalt = req.body.Salt
     let IceCarbohydrates = req.body.Carbohydrates
     let IceProtein = req.body.Protein
+
+    res.on('data', function(chunk) {
+        queryResponse+=chunk;
+        console.log('data');
+    });
     
-    iceCream.allIceCreams.push({ID:"0",Name:IceName,Info:IceInfo,Type:IceType,Company:IceCompany,nutritionalContent: { Energy: { Calorie: IceCalories, Kilojoules: IceKilojoules },Fat:IceFat,Salt:IceSalt,Carbohydrates:IceCarbohydrates,Protein:IceProtein}})
-    IdIncrement()
-    
+    //iceCream.allIceCreams.push({ID:iceCream.allIceCreams.length+1,Name:IceName,Info:IceInfo,Type:IceType,Company:IceCompany,nutritionalContent: { Energy: { Calorie: IceCalories, Kilojoules: IceKilojoules },Fat:IceFat,Salt:IceSalt,Carbohydrates:IceCarbohydrates,Protein:IceProtein}})
+    iceCream.allIceCreams.push(req.body)
     res.send("Ice cream added.")
 })
 
