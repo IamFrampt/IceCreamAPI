@@ -53,7 +53,6 @@ app.get("/allIceCreams/icecream/:id", (req, res) => {
 
 
 app.get("/allIceCreams/add", (req, res) => {
-
     res.sendFile(__dirname + "/public/addData.html")
 })
 
@@ -85,7 +84,6 @@ app.get("/allIceCreams/delete/:id", (req, res) => {
 
     if (iceCream.allIceCreams[(req.params.id) - 1] != null) {
         var deletedIceCream = iceCream.allIceCreams[req.params.id - 1];
-        //console.log(deletedIceCream)
         iceCream.allIceCreams.splice((req.params.id) - 1, 1);
         IdIncrement();
         res.send(deletedIceCream.Name + " was deleted.")
