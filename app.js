@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 const bodyParser = require("body-parser")
+const { json } = require("express")
 app.use(bodyParser.urlencoded({ extended: true }))
 
 
@@ -68,13 +69,8 @@ app.post("/allIceCreams/add", (req, res) => {
     let IceCarbohydrates = req.body.Carbohydrates
     let IceProtein = req.body.Protein
 
-    res.on('data', function(chunk) {
-        queryResponse+=chunk;
-        console.log('data');
-    });
-    
-    //iceCream.allIceCreams.push({ID:iceCream.allIceCreams.length+1,Name:IceName,Info:IceInfo,Type:IceType,Company:IceCompany,nutritionalContent: { Energy: { Calorie: IceCalories, Kilojoules: IceKilojoules },Fat:IceFat,Salt:IceSalt,Carbohydrates:IceCarbohydrates,Protein:IceProtein}})
-    iceCream.allIceCreams.push(req.body)
+    iceCream.allIceCreams.push({ID: iceCream.allIceCreams.length+1,Name:IceName,Info:IceInfo,Type:IceType,Company:IceCompany,nutritionalContent: { Energy: { Calorie: IceCalories, Kilojoules: IceKilojoules },Fat:IceFat,Salt:IceSalt,Carbohydrates:IceCarbohydrates,Protein:IceProtein}})
+        
     res.send("Ice cream added.")
 })
 
