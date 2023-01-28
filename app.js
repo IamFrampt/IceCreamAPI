@@ -67,13 +67,18 @@ app.post("/allIceCreams/add", (req, res) => {
 
     for (let i = 0; i < iceCream.allIceCreams.length; i++) {
         if (iceCream.allIceCreams[i].Name === req.body.Name) {
-            res.statusCode = 401;
+            res.statusCode = 404;
             res.send("Ice cream already exist in the api.")
+        }
+
+        if(i === iceCream.allIceCreams.length-1 && res.statusCode != 404)
+        {
+            iceCream.allIceCreams.push({ ID: iceCream.allIceCreams.length + 1, Name: IceName, Info: IceInfo, Type: IceType, Company: IceCompany, nutritionalContent: { Energy: { Calorie: IceCalories, Kilojoules: IceKilojoules }, Fat: IceFat, Salt: IceSalt, Carbohydrates: IceCarbohydrates, Protein: IceProtein } })
+            res.send("Ice cream added.")
         }
     }
 
-    iceCream.allIceCreams.push({ ID: iceCream.allIceCreams.length + 1, Name: IceName, Info: IceInfo, Type: IceType, Company: IceCompany, nutritionalContent: { Energy: { Calorie: IceCalories, Kilojoules: IceKilojoules }, Fat: IceFat, Salt: IceSalt, Carbohydrates: IceCarbohydrates, Protein: IceProtein } })
-    res.send("Ice cream added.")
+    
 })
 
 
