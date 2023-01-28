@@ -42,13 +42,18 @@ app.get("/allIceCreams", (req, res) => {
     res.send(iceCream.allIceCreams)
 })
 
+app.get("/formExample", (req, res) => {
+    res.sendFile(__dirname + "/public/formexample.html")
+})
+
 app.get("/allIceCreams/icecream/:id", (req, res) => {
-    if (iceCream.allIceCreams[(req.params.id) - 1] != null) {
-        res.send(iceCream.allIceCreams[(req.params.id) - 1])
+    var index = iceCream.allIceCreams.findIndex(x => x.ID == req.params.id)
+    if(iceCream.allIceCreams[index] != null)
+    {
+        res.send(iceCream.allIceCreams[index])   
     }
     
-    res.statusCode = 401;
-    res.send( "No ice cream with that id.")
+    res.send(400)
 })
 
 app.post("/allIceCreams/add", (req, res) => {
@@ -65,24 +70,31 @@ app.post("/allIceCreams/add", (req, res) => {
     let IceCarbohydrates = req.body.Carbohydrates
     let IceProtein = req.body.Protein
 
-    for (let i = 0; i < iceCream.allIceCreams.length; i++) {
-        if (iceCream.allIceCreams[i].Name === req.body.Name) {
-            res.statusCode = 404;
-            res.send("Ice cream already exist in the api.")
+    if(IceName.length>0 && IceInfo.length>0 && IceType.length>0&& IceCompany.length>0 && 
+        IceCalories.length>0&& IceKilojoules.length>0 && IceFat.length>0&& IceSalt.length>0 
+        && IceCarbohydrates.length>0 && IceProtein.length>0)
+    {
+        
+        for (let i = 0; i < iceCream.allIceCreams.length; i++) {
+            if (iceCream.allIceCreams[i].Name === req.body.Name) {
+                res.send(400)
         }
 
         if(i === iceCream.allIceCreams.length-1 && res.statusCode != 404)
         {
             iceCream.allIceCreams.push({ ID: iceCream.allIceCreams.length + 1, Name: IceName, Info: IceInfo, Type: IceType, Company: IceCompany, nutritionalContent: { Energy: { Calorie: IceCalories, Kilojoules: IceKilojoules }, Fat: IceFat, Salt: IceSalt, Carbohydrates: IceCarbohydrates, Protein: IceProtein } })
-            res.send("Ice cream added.")
+            res.send(200)
         }
     }
+    }
+    res.send(400)
 })
 
 app.delete("/allIceCreams/delete/:id", (req, res) => {
-    if (iceCream.allIceCreams[(req.params.id)-1] != null) {
-        iceCream.allIceCreams.splice((req.params.id) - 1, 1);
-        IdIncrement();
+    var index = iceCream.allIceCreams.findIndex(x => x.ID == req.params.id)
+    if(iceCream.allIceCreams[index] != null)
+    {
+        iceCream.allIceCreams.splice(index, 1);
         res.send(200)
     }
     res.send(404)
@@ -94,7 +106,7 @@ app.listen(PORT, () => {
     console.log(`Hey Listen!, You're on port: ${PORT}`)
 })
 
-function IdIncrement() {
+function SetNewID() {
     for (let i = 0; i < iceCream.allIceCreams.length; i++) {
         iceCream.allIceCreams[i].ID = i + 1;
     }
