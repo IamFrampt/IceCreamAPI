@@ -77,21 +77,15 @@ app.post("/allIceCreams/add", (req, res) => {
             res.send("Ice cream added.")
         }
     }
-
-    
 })
 
-
-app.get("/allIceCreams/delete/:id", (req, res) => {
-    if (iceCream.allIceCreams[(req.params.id) - 1] != null) {
-        var deletedIceCream = iceCream.allIceCreams[req.params.id - 1];
+app.delete("/allIceCreams/delete/:id", (req, res) => {
+    if (iceCream.allIceCreams[(req.params.id)-1] != null) {
         iceCream.allIceCreams.splice((req.params.id) - 1, 1);
         IdIncrement();
-        res.send(deletedIceCream.Name + " was deleted.")
+        res.send(200)
     }
-        res.statusCode = 401;
-        res.send('No ice cream at that id.');
-    
+    res.send(404)
 })
 app.use(express.static(__dirname + '/public'));
 
