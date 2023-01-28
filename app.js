@@ -51,12 +51,9 @@ app.get("/allIceCreams/icecream/:id", (req, res) => {
     res.send( "No ice cream with that id.")
 })
 
-
-app.get("/allIceCreams/add", (req, res) => {
-    res.sendFile(__dirname + "/public/addData.html")
-})
-
 app.post("/allIceCreams/add", (req, res) => {
+    
+    res.sendFile(__dirname + "/public/addData.html")
     let IceName = req.body.Name
     let IceInfo = req.body.Info
     let IceType = req.body.Type
@@ -81,7 +78,6 @@ app.post("/allIceCreams/add", (req, res) => {
 
 
 app.get("/allIceCreams/delete/:id", (req, res) => {
-
     if (iceCream.allIceCreams[(req.params.id) - 1] != null) {
         var deletedIceCream = iceCream.allIceCreams[req.params.id - 1];
         iceCream.allIceCreams.splice((req.params.id) - 1, 1);
